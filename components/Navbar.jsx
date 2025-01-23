@@ -6,7 +6,9 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const { getUser, isAuthenticated } = getKindeServerSession();
+  const user = await getUser();
   return (
     <nav className="border-b h-[8vh] flex items-center">
       <div className="container flex items-center justify-between">
@@ -30,20 +32,32 @@ const Navbar = () => {
             Settings
           </h1>
         </Link>
-        <div className="flex items-center gap-x-5">
-          <LoginLink postLoginRedirectURL="/dashboard">
+        {(await isAuthenticated()) ? (
+          <>
             {" "}
-            <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
-              Sign In
-            </button>
-          </LoginLink>
-          <RegisterLink postLoginRedirectURL="/dashboard">
-            {" "}
-            <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
-              Sign Up
-            </button>
-          </RegisterLink>
-        </div>
+            <LogoutLink>
+              {" "}
+              <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
+                Log Out
+              </button>
+            </LogoutLink>
+          </>
+        ) : (
+          <div className="flex items-center gap-x-5">
+            <LoginLink postLoginRedirectURL="/dashboard">
+              {" "}
+              <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
+                Sign In
+              </button>
+            </LoginLink>
+            <RegisterLink postLoginRedirectURL="/dashboard">
+              {" "}
+              <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
+                Sign Up
+              </button>
+            </RegisterLink>
+          </div>
+        )}
       </div>
     </nav>
   );
