@@ -1,4 +1,10 @@
 import Link from "next/link";
+import {
+  RegisterLink,
+  LoginLink,
+  LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const Navbar = () => {
   return (
@@ -10,21 +16,33 @@ const Navbar = () => {
       </div>
       <div className="flex items-center gap-5">
         <Link href="/dashboard">
-          <h1 className="text-xl text-blue-600 hover:text-blue-900 ">Dashboard</h1>
+          <h1 className="text-xl text-blue-600 hover:text-blue-900 ">
+            Dashboard
+          </h1>
         </Link>
         <Link href="/profile">
-          <h1 className="text-xl text-blue-600 hover:text-blue-900 ">Profile</h1>
+          <h1 className="text-xl text-blue-600 hover:text-blue-900 ">
+            Profile
+          </h1>
         </Link>
         <Link href="/settings">
-          <h1 className="text-xl text-blue-600 hover:text-blue-900 ">Settings</h1>
+          <h1 className="text-xl text-blue-600 hover:text-blue-900 ">
+            Settings
+          </h1>
         </Link>
         <div className="flex items-center gap-x-5">
+          <LoginLink postLoginRedirectURL="/dashboard">
+            {" "}
             <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
-                Sign In
+              Sign In
             </button>
+          </LoginLink>
+          <RegisterLink postLoginRedirectURL="/dashboard">
+            {" "}
             <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
-                Sign Up
+              Sign Up
             </button>
+          </RegisterLink>
         </div>
       </div>
     </nav>
