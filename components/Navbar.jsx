@@ -29,6 +29,11 @@ const Navbar = async () => {
         {/* Navigation Links */}
         <div className="flex items-center gap-6">
           {/* Profile Link */}
+          <Link href="/">
+            <Button variant="ghost" className="text-sm font-medium">
+              Home
+            </Button>
+          </Link>
           <Link href="/profile">
             <Button variant="ghost" className="text-sm font-medium">
               Profile
