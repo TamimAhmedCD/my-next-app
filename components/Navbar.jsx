@@ -7,7 +7,11 @@ import {
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { DropdownMenu } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import {
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
 
 const Navbar = async () => {
   const { getUser, isAuthenticated } = getKindeServerSession();
@@ -24,15 +28,14 @@ const Navbar = async () => {
 
         {/* Navigation Links */}
         <div className="flex items-center gap-6">
+          {/* Profile Link */}
+          <Link href="/profile">
+            <Button variant="ghost" className="text-sm font-medium">
+              Profile
+            </Button>
+          </Link>
           {authenticated ? (
             <>
-              {/* Profile Link */}
-              <Link href="/profile">
-                <Button variant="ghost" className="text-sm font-medium">
-                  Profile
-                </Button>
-              </Link>
-
               {/* Dropdown Menu for Authenticated User */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
