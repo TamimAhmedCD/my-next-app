@@ -10,26 +10,16 @@ const Navbar = async () => {
   const { getUser, isAuthenticated } = getKindeServerSession();
   const user = await getUser();
   return (
-    <nav className="border-b h-[8vh] flex items-center">
+    <nav className="p-3 flex items-center">
       <div className="container flex items-center justify-between">
         <Link href="/">
           <h1 className="font-bold text-3xl ">Logo</h1>
         </Link>
       </div>
       <div className="flex items-center gap-5">
-        <Link href="/dashboard">
-          <h1 className="text-xl text-blue-600 hover:text-blue-900 ">
-            Dashboard
-          </h1>
-        </Link>
         <Link href="/profile">
           <h1 className="text-xl text-blue-600 hover:text-blue-900 ">
             Profile
-          </h1>
-        </Link>
-        <Link href="/settings">
-          <h1 className="text-xl text-blue-600 hover:text-blue-900 ">
-            Settings
           </h1>
         </Link>
         {(await isAuthenticated()) ? (
