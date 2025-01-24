@@ -7,7 +7,7 @@ export default async function DashboardLayout({ children }) {
   const user = await getUser();
 
   if (!user) {
-    return redirect("/api/auth/login?post_login_redirect_url=http%3A%2F%2Flocalhost%3A3000%2Fprofile");
+    return redirect("/api/auth/login?post_login_redirect_url=https://my-next-bloggtt.vercel.app/profile");
   }
 
   return <div>{children}</div>;
