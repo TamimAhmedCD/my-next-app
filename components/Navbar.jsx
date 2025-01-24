@@ -5,49 +5,69 @@ import {
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { DropdownMenu } from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
+import { DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 const Navbar = async () => {
   const { getUser, isAuthenticated } = getKindeServerSession();
   const user = await getUser();
+  const authenticated = await isAuthenticated();
+
   return (
-    <nav className="p-3 flex items-center">
-      <div className="container flex items-center justify-between">
+    <nav className="p-4 border-b bg-white">
+      <div className="container mx-auto flex items-center justify-between">
+        {/* Logo Section */}
         <Link href="/">
-          <h1 className="font-bold text-3xl ">Logo</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Logo</h1>
         </Link>
-      </div>
-      <div className="flex items-center gap-5">
-        <Link href="/profile">
-          <h1 className="text-xl text-blue-600 hover:text-blue-900 ">
-            Profile
-          </h1>
-        </Link>
-        {(await isAuthenticated()) ? (
-          <>
-            {" "}
-            <LogoutLink>
-              {" "}
-              <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
-                Log Out
-              </button>
-            </LogoutLink>
-          </>
-        ) : (
-          <div className="flex items-center gap-x-5">
-            <LoginLink postLoginRedirectURL="/profile">
-              {" "}
-              <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
-                Sign In
-              </button>
-            </LoginLink>
-            <RegisterLink postLoginRedirectURL="/profile">
-              {" "}
-              <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
-                Sign Up
-              </button>
-            </RegisterLink>
-          </div>
-        )}
+
+        {/* Navigation Links */}
+        <div className="flex items-center gap-6">
+          {authenticated ? (
+            <>
+              {/* Profile Link */}
+              <Link href="/profile">
+                <Button variant="ghost" className="text-sm font-medium">
+                  Profile
+                </Button>
+              </Link>
+
+              {/* Dropdown Menu for Authenticated User */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="text-sm font-medium">
+                    {user?.first_name || "User"}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <Link href="/profile" className="w-full">
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <LogoutLink>
+                      <button className="w-full text-left">Log Out</button>
+                    </LogoutLink>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <div className="flex items-center gap-4">
+              {/* Login Button */}
+              <LoginLink postLoginRedirectURL="/profile">
+                <Button variant="outline">Sign In</Button>
+              </LoginLink>
+
+              {/* Register Button */}
+              <RegisterLink postLoginRedirectURL="/profile">
+                <Button variant="default">Sign Up</Button>
+              </RegisterLink>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );
