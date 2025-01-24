@@ -34,13 +34,13 @@ const Navbar = async () => {
           </>
         ) : (
           <div className="flex items-center gap-x-5">
-            <LoginLink postLoginRedirectURL="/dashboard">
+            <LoginLink postLoginRedirectURL="/profile">
               {" "}
               <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
                 Sign In
               </button>
             </LoginLink>
-            <RegisterLink postLoginRedirectURL="/dashboard">
+            <RegisterLink postLoginRedirectURL="/profile">
               {" "}
               <button className="w-[100px] bg-gray-200 p-2 rounded-md text-center">
                 Sign Up
