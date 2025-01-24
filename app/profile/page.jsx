@@ -6,7 +6,7 @@ const DashboardPage = async () => {
     const user = await getUser()
     return (
         <div className='flex flex-col items-center justify-center mt-24'>
-            <p className='text-xl'>Hi {user?.given_name}, this i your dashboard</p>
+            <p className='text-xl'>Hi {user?.given_name}, this i your Profile</p>
         </div>
     );
 };
